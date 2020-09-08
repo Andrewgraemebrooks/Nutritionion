@@ -24,3 +24,6 @@ yarn-error.log*
 
 # config
 src/config/config.js
+
+# vs code config
+nutritionion.code-workspace
