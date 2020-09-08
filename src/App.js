@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import config from "./config/config";
+import Table from "./components/Table";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      userInput: "",
       calories: 0,
       cautions: [],
       dietLabels: [],
@@ -45,19 +47,39 @@ class App extends Component {
   render() {
     return (
       <div className="container">
-        <div className="row justify-content-center">
-          <div className="col">
+        <div className="row justify-content-center align-items-center">
+          <div className="col-sm-4">
             <h1 className="display4 text-center">Get Nutrition Information</h1>
-            <button
-              className="btn btn-danger"
-              type="button"
-              onClick={(e) => {
-                this.getNutritionInfo(e);
-              }}
-            >
-              Get
-            </button>
           </div>
+        </div>
+        <div className="row justify-content-center align-items-center">
+          <div className="col-sm-4">
+            <div className="input-group">
+              <div className="input-group-prepend"></div>
+              <textarea
+                className="form-control"
+                aria-label="With textarea"
+              ></textarea>
+              <div className="input-group-append">
+                <button
+                  className="btn btn-danger"
+                  type="button"
+                  id="button-addon2"
+                  onClick={(e) => {
+                    this.getNutritionInfo(e);
+                  }}
+                >
+                  Get Info
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="row justify-content-center align-items-center">
+          <h1 className="display4 text-center">Results</h1>
+        </div>
+        <div className="row justify-content-center align-items-center">
+        {/* <Table /> */}
         </div>
       </div>
     );
