@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import config from "./config/config";
 import Table from "./components/Table";
+import { Map, List } from "immutable";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       userInput: "",
-      results: {},
+      history: List(),
     };
   }
 
@@ -30,10 +31,8 @@ class App extends Component {
     )
       .then((res) => res.json())
       .then((res) => {
-        this.setState({
-          results: res,
-        });
-        console.log(this.state.results);
+        this.setState({ history: this.state.history.push(Map(res)) });
+        console.log(this.state);
       })
       .catch((err) => console.log(err));
   }
@@ -72,7 +71,7 @@ class App extends Component {
           <h1 className="display4 text-center">Results</h1>
         </div>
         <div className="row justify-content-center align-items-center">
-          <Table results={this.state.results} />
+          <Table/>
         </div>
       </div>
     );

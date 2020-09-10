@@ -3,7 +3,7 @@ import { Map } from "immutable";
 
 class Table extends Component {
   render() {
-    const results = Map(this.props.results);
+    // const results = Map(this.props.results);
 
     return (
       <div className="col">
