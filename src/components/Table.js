@@ -3,17 +3,7 @@ import { Map } from "immutable";
 
 class Table extends Component {
   render() {
-    const results = Map({
-      calories: this.props.results.calories,
-      cautions: this.props.results.cautions,
-      dietLabels: this.props.results.dietLabels,
-      healthLabels: this.props.results.healthLabels,
-      ingredients: this.props.results.ingredients,
-      totalDaily: this.props.results.totalDaily,
-      totalNutrients: this.props.results.totalNutrients,
-      totalNutrientsKCal: this.props.results.totalNutrientsKCal,
-      totalWeight: this.props.results.totalWeight,
-    });
+    const results = Map(this.props.results);
 
     return (
       <div className="col">
@@ -35,7 +25,7 @@ class Table extends Component {
           <tbody>
             <tr>
               <th>1</th>
-              <th>{typeof results.get("healthLabels")}</th>
+              <th>{results.get("calories")}</th>
               <th>Example</th>
               <th>Example</th>
               <th>Example</th>
