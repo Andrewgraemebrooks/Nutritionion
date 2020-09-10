@@ -79,7 +79,7 @@ class App extends Component {
           <h1 className="display4 text-center">Results</h1>
         </div>
         <div className="row justify-content-center align-items-center">
-        {/* <Table /> */}
+            <Table />
         </div>
       </div>
     );

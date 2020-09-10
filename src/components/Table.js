@@ -2,24 +2,36 @@ import React from "react";
 
 function Table(props) {
   return (
-    <table className="table">
-      <thead>
-        <tr>
-          <th scope="col-sm-4">Calories</th>
-          <th scope="col-sm-4">Cautions</th>
-          <th scope="col-sm-4">Diet Labels</th>
-          <th scope="col-sm-4">Health Labels</th>
-          <th scope="col-sm-4">Ingredients</th>
-          <th scope="col-sm-4">Total Daily</th>
-          <th scope="col-sm-4">Total Nutrients</th>
-          <th scope="col-sm-4">Total Nutrients (KCal)</th>
-          <th scope="col-sm-4">Total Weight</th>
-        </tr>
-      </thead>
-      <tbody>
-        
-      </tbody>
-    </table>
+    <div className="col">
+      <table className="table table-bordered table-responsive">
+        <thead>
+          <tr>
+            <th>Calories</th>
+            <th>Cautions</th>
+            <th>Diet Labels</th>
+            <th>Health Labels</th>
+            <th>Ingredients</th>
+            <th>Total Daily</th>
+            <th>Total Nutrients</th>
+            <th>Total Nutrients (KCal)</th>
+            <th>Total Weight</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Example</th>
+            <th>Example</th>
+            <th>Example</th>
+            <th>Example</th>
+            <th>Example</th>
+            <th>Example</th>
+            <th>Example</th>
+            <th>Example</th>
+            <th>Example</th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   );
 }
 
