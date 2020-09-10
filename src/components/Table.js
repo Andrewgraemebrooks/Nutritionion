@@ -10,7 +10,7 @@ class Table extends Component {
         <table className="table table-bordered table-responsive">
           <thead>
             <tr>
-              <th>Number</th>
+              <th>Ingredient</th>
               <th>Calories</th>
               <th>Cautions</th>
               <th>Diet Labels</th>
@@ -24,8 +24,8 @@ class Table extends Component {
           </thead>
           <tbody>
             <tr>
-              <th>1</th>
-              <th>{results.get("calories")}</th>
+              <th>Example</th>
+              <th>Example</th>
               <th>Example</th>
               <th>Example</th>
               <th>Example</th>
