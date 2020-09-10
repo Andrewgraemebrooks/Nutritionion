@@ -3,7 +3,8 @@ import { Map } from "immutable";
 
 class Table extends Component {
   render() {
-    // const results = Map(this.props.results);
+    // Gets the latest results. If there aren't any, default to empty Map
+    const latestResults = this.props.history.last(Map());
 
     return (
       <div className="col">
@@ -25,7 +26,7 @@ class Table extends Component {
           <tbody>
             <tr>
               <th>Example</th>
-              <th>Example</th>
+              <th>{latestResults.get("calories")}</th>
               <th>Example</th>
               <th>Example</th>
               <th>Example</th>
