@@ -24,7 +24,7 @@ class App extends Component {
     const APP_KEY = config.API_KEY;
 
     fetch(
-      `${PROXY}https://api.edamam.com/api/nutrition-data?app_id=${APP_ID}&app_key=${APP_KEY}&ingr=1%20large%20apple`,
+      `${PROXY}https://api.edamam.com/api/nutrition-data?app_id=${APP_ID}&app_key=${APP_KEY}&ingr=${this.state.userInput}`,
       {
         method: "GET",
       }
@@ -53,6 +53,11 @@ class App extends Component {
                 className="form-control"
                 placeholder="Ingredient"
                 aria-label="Ingredient Input"
+                onChange={(e) =>
+                  this.handleChange({
+                    userInput: encodeURI(e.target.value),
+                  })
+                }
               />
               <div className="input-group-append">
                 <button
@@ -71,7 +76,7 @@ class App extends Component {
           <h1 className="display4 text-center">Results</h1>
         </div>
         <div className="row justify-content-center align-items-center">
-          <Table history={this.state.history}/>
+          <Table history={this.state.history} />
         </div>
       </div>
     );
