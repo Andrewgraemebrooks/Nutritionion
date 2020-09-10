@@ -7,16 +7,7 @@ class App extends Component {
     super(props);
     this.state = {
       userInput: "",
-      calories: 0,
-      cautions: [],
-      dietLabels: [],
-      healthLabels: [],
-      ingredients: [],
-      totalDaily: {},
-      totalNutrients: {},
-      totalNutrientsKCal: {},
-      totalWeight: 0,
-      uri: "",
+      results: {},
     };
   }
 
@@ -39,7 +30,10 @@ class App extends Component {
     )
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
+        this.setState({
+          results: res,
+        });
+        console.log(this.state.results);
       })
       .catch((err) => console.log(err));
   }
@@ -78,7 +72,7 @@ class App extends Component {
           <h1 className="display4 text-center">Results</h1>
         </div>
         <div className="row justify-content-center align-items-center">
-          <Table />
+          <Table results={this.state.results} />
         </div>
       </div>
     );
