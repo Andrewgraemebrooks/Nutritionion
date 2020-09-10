@@ -54,22 +54,21 @@ class App extends Component {
         </div>
         <div className="row justify-content-center align-items-center">
           <div className="col-sm-4">
-            <div className="input-group">
-              <div className="input-group-prepend"></div>
-              <textarea
+            <div className="input-group mb-3">
+              <input
+                type="text"
                 className="form-control"
-                aria-label="With textarea"
-              ></textarea>
+                placeholder="Ingredient"
+                aria-label="Ingredient Input"
+              />
               <div className="input-group-append">
                 <button
-                  className="btn btn-danger"
-                  type="button"
-                  id="button-addon2"
+                  className="btn btn-outline-secondary"
                   onClick={(e) => {
                     this.getNutritionInfo(e);
                   }}
                 >
-                  Get Info
+                  Button
                 </button>
               </div>
             </div>
@@ -79,7 +78,7 @@ class App extends Component {
           <h1 className="display4 text-center">Results</h1>
         </div>
         <div className="row justify-content-center align-items-center">
-            <Table />
+          <Table />
         </div>
       </div>
     );
