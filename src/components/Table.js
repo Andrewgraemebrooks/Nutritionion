@@ -6,6 +6,7 @@ function Table(props) {
       <table className="table table-bordered table-responsive">
         <thead>
           <tr>
+            <th>Number</th>
             <th>Calories</th>
             <th>Cautions</th>
             <th>Diet Labels</th>
@@ -19,6 +20,7 @@ function Table(props) {
         </thead>
         <tbody>
           <tr>
+            <th>1</th>
             <th>Example</th>
             <th>Example</th>
             <th>Example</th>
