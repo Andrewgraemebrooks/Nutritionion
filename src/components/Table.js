@@ -1,8 +1,10 @@
 import React, { Component } from "react";
+import { v4 as uuidv4 } from "uuid";
+import { Map } from "immutable";
 
 class Table extends Component {
   render() {
-
+    const history = this.props.history;
     return (
       <div className="col">
         <table className="table table-bordered">
@@ -14,10 +16,10 @@ class Table extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.props.history &&
-              this.props.history.map((result) => {
+            {history &&
+              history.map((result) => {
                 return (
-                  <tr>
+                  <tr key={uuidv4()}>
                     <td>{result.get("calories")}</td>
                     <td>{result.get("calories")}</td>
                     <td>{result.get("calories")}</td>
