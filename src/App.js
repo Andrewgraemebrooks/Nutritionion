@@ -4,25 +4,45 @@ import Table from "./components/Table";
 import { Map, List } from "immutable";
 
 class App extends Component {
+  /**
+   * Initialises the state for the App class
+   * @constructor
+   * @param {*} props - The props to be passed to the parent class (React.Component)'s constructor.
+   */
   constructor(props) {
+    // Calling the constructor of the parent class to initialise the "this.props" object.
     super(props);
+    // Initialising state
     this.state = {
       userInput: "",
       history: List(),
     };
   }
 
+  /**
+   * Updates the state when a change occurs
+   * @param {Object} changedObject - The object that is added to state.
+   * @returns {void}
+   */
   handleChange(changedObject) {
     this.setState(changedObject);
   }
 
+  /**
+   * Fetches the nutrition information of the requested ingredient.
+   * @param {React.MouseEvent<HTMLButtonElement, MouseEvent>} e - The mouse event, e.g. a clicked button.
+   * @returns {void}
+   */
   getNutritionInfo(e) {
-    // Proxy to prevent a CORS error
+
+    // The proxy to avoid the CORS error.
     const PROXY = "https://cors-anywhere.herokuapp.com/";
-    // API App ID and Key
+
+    // Variables to store the configuration information.
     const APP_ID = config.API_ID;
     const APP_KEY = config.API_KEY;
 
+    // Calling the fetch function to request the ingredient information from the API.
     fetch(
       `${PROXY}https://api.edamam.com/api/nutrition-data?app_id=${APP_ID}&app_key=${APP_KEY}&ingr=${this.state.userInput}`,
       {
@@ -31,6 +51,8 @@ class App extends Component {
     )
       .then((res) => res.json())
       .then((res) => {
+        // Update the state's history by pushing the response onto the stack.
+        // The response is converted into an immutable Map to ensure that the data stays consistent.
         this.setState({ history: this.state.history.push(Map(res)) });
         console.log(this.state);
       })
@@ -54,6 +76,7 @@ class App extends Component {
                 placeholder="Ingredient"
                 aria-label="Ingredient Input"
                 onChange={(e) =>
+                  // Updates the state with the user's input
                   this.handleChange({
                     userInput: encodeURI(e.target.value),
                   })
@@ -63,6 +86,7 @@ class App extends Component {
                 <button
                   className="btn btn-outline-secondary"
                   onClick={(e) => {
+                    // Retrieve the nutrition information for the ingredient when the button is clicked.
                     this.getNutritionInfo(e);
                   }}
                 >
