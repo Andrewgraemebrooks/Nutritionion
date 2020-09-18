@@ -8,9 +8,6 @@ const router = express.Router();
 const fetch = require("node-fetch");
 const config = require("../config/config");
 
-// Example input
-const exampleInput = encodeURI("1 Large Apple");
-
 // Variables to store the configuration information.
 const APP_ID = config.API_ID;
 const APP_KEY = config.API_KEY;
@@ -32,12 +29,17 @@ router.get("/test", (req, res) => {
  * @function
  * @param {string} path - Express path
  */
-router.get("/", (req, res) => {
-  fetch(`${BASE_URL}app_id=${APP_ID}&app_key=${APP_KEY}&ingr=${exampleInput}`, {
-    method: "GET",
-  })
+router.post("/", (req, res) => {
+  fetch(
+    `${BASE_URL}app_id=${APP_ID}&app_key=${APP_KEY}&ingr=${req.body.userInput}`,
+    {
+      method: "GET",
+    }
+  )
     .then((fetchResponse) => fetchResponse.json())
-    .then((fetchResponse) => res.status(200).send(fetchResponse))
+    .then((fetchResponse) => {
+      res.status(200).send(fetchResponse);
+    })
     .catch((err) => console.log(err));
 });
 
