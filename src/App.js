@@ -1,19 +1,18 @@
 import React, { Component } from "react";
-import config from "./config/config";
+import axios from "axios";
 import Table from "./components/Table";
 import { Map, List } from "immutable";
-import validateUserInput from "./validation/userInput";
 import classNames from "classnames";
+import validateUserInput from "./validation/userInput";
 
 class App extends Component {
   /**
    * Initialises the state for the App class
    * @constructor
-   * @param {*} props - The props to be passed to the parent class (React.Component)'s constructor.
    */
-  constructor(props) {
+  constructor() {
     // Calling the constructor of the parent class to initialise the "this.props" object.
-    super(props);
+    super();
     // Initialising state
     this.state = {
       userInput: "",
@@ -37,17 +36,12 @@ class App extends Component {
    * @returns {void}
    */
   getNutritionInfo(e) {
-    // The proxy to avoid the CORS error.
-    const PROXY = "https://cors-anywhere.herokuapp.com/";
-
-    // Variables to store the configuration information.
-    const APP_ID = config.API_ID;
-    const APP_KEY = config.API_KEY;
-
     // Validate the user input
-    const { inputErrors, noInputErrors, userInput } = validateUserInput(
+    const { inputErrors, noInputErrors } = validateUserInput(
       this.state.userInput
     );
+
+    const data = { userInput: encodeURI(this.state.userInput) };
 
     // If there are errors set the error to state
     if (!noInputErrors) {
@@ -57,18 +51,13 @@ class App extends Component {
     } else {
       // Set the state's inputErrors entry to an empty map
       this.setState({ inputErrors: Map() });
-      // Calling the fetch function to request the ingredient information from the API.
-      fetch(
-        `${PROXY}https://api.edamam.com/api/nutrition-data?app_id=${APP_ID}&app_key=${APP_KEY}&ingr=${userInput}`,
-        {
-          method: "GET",
-        }
-      )
-        .then((res) => res.json())
+
+      axios
+        .post("http://localhost:5000/api/nutrition/", data)
         .then((res) => {
           // Update the state's history by pushing the response onto the stack.
           // The response is converted into an immutable Map to ensure that the data stays consistent.
-          this.setState({ history: this.state.history.push(Map(res)) });
+          this.setState({ history: this.state.history.push(Map(res.data)) });
         })
         .catch((err) => console.log(err));
     }
@@ -97,7 +86,7 @@ class App extends Component {
                 onChange={(e) =>
                   // Updates the state with the user's input
                   this.handleChange({
-                    userInput: encodeURI(e.target.value),
+                    userInput: e.target.value,
                   })
                 }
               />

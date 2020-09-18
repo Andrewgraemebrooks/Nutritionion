@@ -17,13 +17,15 @@ const validateUserInput = (userInput) => {
 
   // Adds an error if the string is empty.
   if (validator.isEmpty(userInput)) {
-    inputErrors = inputErrors.set("isEmpty", "You must enter an ingredient to search");
+    inputErrors = inputErrors.set(
+      "isEmpty",
+      "You must enter an ingredient to search"
+    );
   }
 
   return {
     inputErrors,
     noInputErrors: inputErrors.isEmpty(),
-    userInput,
   };
 };
 
