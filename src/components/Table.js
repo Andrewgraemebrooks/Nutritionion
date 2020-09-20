@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { v4 as uuidv4 } from "uuid";
 
 class Table extends Component {
   /**
@@ -23,6 +22,9 @@ class Table extends Component {
             <tr>
               <th>Ingredient</th>
               <th>Calories</th>
+              <th>Protein</th>
+              <th>Carbs</th>
+              <th>Fat</th>
               <th>Health Labels</th>
             </tr>
           </thead>
@@ -30,24 +32,48 @@ class Table extends Component {
             {history &&
               history.map((result) => {
                 return (
-                  <tr key={uuidv4()}>
+                  <tr
+                    key={result.getIn(["ingredients", 0, "text"]) + Date.now()}
+                  >
                     <td>
                       {
-                        // Retrieves the ingredient's information from the ingredient object.
-                        result.get("ingredients") &&
-                          result.get("ingredients").map((ingredient) => {
-                            return this.capitaliseSentence(ingredient.text);
-                          })
+                        // Retrieves the requested ingredient information.
+                        this.capitaliseSentence(
+                          result.getIn(["ingredients", 0, "text"])
+                        )
                       }
                     </td>
-                    <td>{result.get("calories")}</td>
                     <td>
                       {
-                        // Retrieves the healthLabel information from the healthLabel object.
+                        // Displays the ingredient's calories.
+                        result.get("calories")
+                      }
+                    </td>
+                    <td>
+                      {result
+                        .getIn(["totalNutrients", "PROCNT", "quantity"])
+                        .toFixed(2) + " "}
+                      grams
+                    </td>
+                    <td>
+                      {result
+                        .getIn(["totalNutrients", "CHOCDF", "quantity"])
+                        .toFixed(2) + " "}
+                      grams
+                    </td>
+                    <td>
+                      {result
+                        .getIn(["totalNutrients", "FAT", "quantity"])
+                        .toFixed(2) + " "}
+                      grams
+                    </td>
+                    <td>
+                      {
+                        // Retrieves the healthLabel information.
                         result.get("healthLabels") &&
                           result.get("healthLabels").map((healthLabel) => {
                             return (
-                              <li key={uuidv4()}>
+                              <li key={healthLabel + Date.now()}>
                                 {this.capitaliseSentence(
                                   healthLabel.toLowerCase().replaceAll("_", " ")
                                 )}
