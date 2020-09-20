@@ -4,6 +4,7 @@ import Table from "./components/Table";
 import { Map, List } from "immutable";
 import classNames from "classnames";
 import validateUserInput from "./validation/userInput";
+import isEmpty from "./validation/isEmpty";
 
 class App extends Component {
   /**
@@ -17,7 +18,7 @@ class App extends Component {
     this.state = {
       userInput: "",
       history: List(),
-      inputErrors: Map(),
+      errors: Map(),
     };
   }
 
@@ -37,28 +38,38 @@ class App extends Component {
    */
   getNutritionInfo(e) {
     // Validate the user input
-    const { inputErrors, noInputErrors } = validateUserInput(
-      this.state.userInput
-    );
+    const { errors, noErrors } = validateUserInput(this.state.userInput);
 
     const data = { userInput: encodeURI(this.state.userInput) };
 
     // If there are errors set the error to state
-    if (!noInputErrors) {
-      this.setState({ inputErrors: inputErrors });
-      // Do not make an API call if there are errors.
+    if (!noErrors) {
+      this.setState({ errors: errors });
+      // Do not make an API call if there is an input error.
       return;
     } else {
-      // Set the state's inputErrors entry to an empty map
-      this.setState({ inputErrors: Map() });
-
+      // Reset the state's errors to an empty map
+      this.setState({ errors: Map() });
       axios
         .post("http://localhost:5000/api/nutrition/", data)
         .then((res) => {
-          // Update the state's history by pushing the response onto the stack.
-          // The response is converted into an immutable Map to ensure that the data stays consistent.
-          this.setState({ history: this.state.history.push(Map(res.data)) });
+          const data = Map(res.data);
+
+          // If the data's total nutrients is empty, the ingredient is not valid.
+          if (isEmpty(data.get("totalNutrients"))) {
+            // Add the error to state
+            this.setState({
+              errors: this.state.errors.set(
+                "invalidIngredient",
+                "The ingredient requested is not valid"
+              ),
+            });
+          } else {
+            // Update the state's history by pushing the data onto the history stack.
+            this.setState({ history: this.state.history.push(data) });
+          }
         })
+        // Catch any errors and log them to console.
         .catch((err) => console.log(err));
     }
   }
@@ -66,11 +77,13 @@ class App extends Component {
   render() {
     return (
       <div className="container">
+        {/* Website Title */}
         <div className="row justify-content-center align-items-center">
           <div className="col-sm-4">
             <h1 className="display4 text-center">Get Nutrition Information</h1>
           </div>
         </div>
+        {/* The Input Area */}
         <div className="row justify-content-center align-items-center">
           <div className="col-sm-4">
             <div className="input-group mb-3">
@@ -79,7 +92,7 @@ class App extends Component {
                 // The classnames module allows for conditional classes
                 className={classNames("form-control", {
                   // Only add the "is-invalid" class if there are input errors.
-                  "is-invalid": !this.state.inputErrors.isEmpty(),
+                  "is-invalid": !this.state.errors.isEmpty(),
                 })}
                 placeholder="Ingredient"
                 aria-label="Ingredient Input"
@@ -103,11 +116,11 @@ class App extends Component {
               </div>
               {
                 // If there are input errors, display them underneath the input group
-                !this.state.inputErrors.isEmpty() && (
+                !this.state.errors.isEmpty() && (
                   <div className="invalid-feedback">
                     {
                       // Display the latest input error.
-                      this.state.inputErrors.last()
+                      this.state.errors.last()
                     }
                   </div>
                 )
@@ -115,11 +128,12 @@ class App extends Component {
             </div>
           </div>
         </div>
+        {/* The Results Title */}
         <div className="row justify-content-center align-items-center">
           <h1 className="display4 text-center">Results</h1>
         </div>
+        {/* The Results Table */}
         <div className="row justify-content-center align-items-center">
-          {/* Display the results table */}
           <Table history={this.state.history} />
         </div>
       </div>

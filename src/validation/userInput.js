@@ -10,22 +10,19 @@ import { Map } from "immutable";
  */
 const validateUserInput = (userInput) => {
   // Create an errors object to store errors
-  let inputErrors = Map();
+  let errors = Map();
 
   // Validator only handles strings, so set it to an empty string if an empty object, null or undefinied.
   userInput = !isEmpty(userInput) ? userInput : "";
 
   // Adds an error if the string is empty.
   if (validator.isEmpty(userInput)) {
-    inputErrors = inputErrors.set(
-      "isEmpty",
-      "You must enter an ingredient to search"
-    );
+    errors = errors.set("isEmpty", "You must enter an ingredient to search");
   }
 
   return {
-    inputErrors,
-    noInputErrors: inputErrors.isEmpty(),
+    errors,
+    noErrors: errors.isEmpty(),
   };
 };
 
