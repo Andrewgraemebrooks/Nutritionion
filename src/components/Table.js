@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { v4 as uuidv4 } from "uuid";
 
 class Table extends Component {
   /**
@@ -33,14 +32,15 @@ class Table extends Component {
             {history &&
               history.map((result) => {
                 return (
-                  <tr key={uuidv4()}>
+                  <tr
+                    key={result.getIn(["ingredients", 0, "text"]) + Date.now()}
+                  >
                     <td>
                       {
                         // Retrieves the requested ingredient information.
-                        result.get("ingredients") &&
-                          result.get("ingredients").map((ingredient) => {
-                            return this.capitaliseSentence(ingredient.text);
-                          })
+                        this.capitaliseSentence(
+                          result.getIn(["ingredients", 0, "text"])
+                        )
                       }
                     </td>
                     <td>
@@ -50,19 +50,22 @@ class Table extends Component {
                       }
                     </td>
                     <td>
-                      {`${result
+                      {result
                         .getIn(["totalNutrients", "PROCNT", "quantity"])
-                        .toFixed(2)} grams`}
+                        .toFixed(2) + " "}
+                      grams
                     </td>
                     <td>
-                      {`${result
+                      {result
                         .getIn(["totalNutrients", "CHOCDF", "quantity"])
-                        .toFixed(2)} grams`}
+                        .toFixed(2) + " "}
+                      grams
                     </td>
                     <td>
-                      {`${result
+                      {result
                         .getIn(["totalNutrients", "FAT", "quantity"])
-                        .toFixed(2)} grams`}
+                        .toFixed(2) + " "}
+                      grams
                     </td>
                     <td>
                       {
@@ -70,7 +73,7 @@ class Table extends Component {
                         result.get("healthLabels") &&
                           result.get("healthLabels").map((healthLabel) => {
                             return (
-                              <li key={uuidv4()}>
+                              <li key={healthLabel + Date.now()}>
                                 {this.capitaliseSentence(
                                   healthLabel.toLowerCase().replaceAll("_", " ")
                                 )}
