@@ -76,65 +76,69 @@ class App extends Component {
 
   render() {
     return (
-      <div className="container">
-        {/* Website Title */}
-        <div className="row justify-content-center align-items-center">
-          <div className="col-sm-4">
-            <h1 className="display4 text-center">Get Nutrition Information</h1>
-          </div>
-        </div>
-        {/* The Input Area */}
-        <div className="row justify-content-center align-items-center">
-          <div className="col-sm-4">
-            <div className="input-group mb-3">
-              <input
-                type="text"
-                // The classnames module allows for conditional classes
-                className={classNames("form-control", {
-                  // Only add the "is-invalid" class if there are input errors.
-                  "is-invalid": !this.state.errors.isEmpty(),
-                })}
-                placeholder="Ingredient"
-                aria-label="Ingredient Input"
-                onChange={(e) =>
-                  // Updates the state with the user's input
-                  this.handleChange({
-                    userInput: e.target.value,
-                  })
-                }
-              />
-              <div className="input-group-append">
-                <button
-                  className="btn btn-outline-secondary"
-                  onClick={(e) => {
-                    // Retrieve the nutrition information for the ingredient when the button is clicked.
-                    this.getNutritionInfo(e);
-                  }}
-                >
-                  Button
-                </button>
-              </div>
-              {
-                // If there are input errors, display them underneath the input group
-                !this.state.errors.isEmpty() && (
-                  <div className="invalid-feedback">
-                    {
-                      // Display the latest input error.
-                      this.state.errors.last()
-                    }
-                  </div>
-                )
-              }
+      <div className="container-fluid">
+        <div className="container justify-content-center align-items-center">
+          {/* Website Title */}
+          <div className="row justify-content-center align-items-center">
+            <div className="col-sm-4">
+              <h1 className="display4 text-center">
+                Get Nutrition Information
+              </h1>
             </div>
           </div>
-        </div>
-        {/* The Results Title */}
-        <div className="row justify-content-center align-items-center">
-          <h1 className="display4 text-center">Results</h1>
-        </div>
-        {/* The Results Table */}
-        <div className="row justify-content-center align-items-center">
-          <Table history={this.state.history} />
+          {/* The Input Area */}
+          <div className="row justify-content-center align-items-center">
+            <div className="col-sm-4">
+              <div className="input-group mb-3">
+                <input
+                  type="text"
+                  // The classnames module allows for conditional classes
+                  className={classNames("form-control", {
+                    // Only add the "is-invalid" class if there are input errors.
+                    "is-invalid": !this.state.errors.isEmpty(),
+                  })}
+                  placeholder="Ingredient"
+                  aria-label="Ingredient Input"
+                  onChange={(e) =>
+                    // Updates the state with the user's input
+                    this.handleChange({
+                      userInput: e.target.value,
+                    })
+                  }
+                />
+                <div className="input-group-append">
+                  <button
+                    className="btn btn-outline-secondary"
+                    onClick={(e) => {
+                      // Retrieve the nutrition information for the ingredient when the button is clicked.
+                      this.getNutritionInfo(e);
+                    }}
+                  >
+                    Button
+                  </button>
+                </div>
+                {
+                  // If there are input errors, display them underneath the input group
+                  !this.state.errors.isEmpty() && (
+                    <div className="invalid-feedback">
+                      {
+                        // Display the latest input error.
+                        this.state.errors.last()
+                      }
+                    </div>
+                  )
+                }
+              </div>
+            </div>
+          </div>
+          {/* The Results Title */}
+          <div className="row justify-content-center align-items-center">
+            <h1 className="display4 text-center">Results</h1>
+          </div>
+          {/* The Results Table */}
+          <div className="row justify-content-center align-items-center">
+            <Table history={this.state.history} />
+          </div>
         </div>
       </div>
     );
