@@ -10903,18 +10903,9 @@ a.text-dark:focus {
   }
 }
 
-.main-container {
+#app {
   min-height: 100vh;
   background: #2b7a78;
-}
-
-#search-col {
-  border: solid blue;
-  color: #f3ffff;
-}
-
-#table-col {
-  border: solid green;
 }
 
 @media screen and (max-width: 600px) {

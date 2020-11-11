@@ -16,7 +16,6 @@ class Search extends Component {
       .post("http://nutritionion.test/api/nutrition", data)
       .then((res) => {
         const data = Map(res.data)
-        console.log(data)
         // If the data's total nutrients is empty, the ingredient is not valid.
         if (isEmpty(data.get("totalNutrients"))) {
           // Add the error to state
@@ -36,8 +35,11 @@ class Search extends Component {
   }
   render() {
     return (
-      <div className="container justify-content-center align-content-center">
-        <div className="row text-center justify-content-center">
+      <div
+        id="search-col"
+        className="col-sm-4 d-flex flex-column justify-content-center align-items-center"
+      >
+        <div className="row text-center text-white">
           <h1>Get Nutritional Information</h1>
         </div>
         <div className="row justify-content-center">

@@ -19,21 +19,15 @@ class App extends Component {
 
   render() {
     return (
-      <React.Fragment>
-        <div className="row">
-          <div id="search-col" className="col-md-4">
-            <Search
-              handleChange={this.handleChange.bind(this)}
-              history={this.state.history}
-            />
-          </div>
-          {!this.state.history.isEmpty() && (
-            <div id="table-col" className="col-md-4">
-              <Table history={this.state.history} />
-            </div>
-          )}
-        </div>
-      </React.Fragment>
+      <div className="row">
+        <React.Fragment>
+          <Search
+            handleChange={this.handleChange.bind(this)}
+            history={this.state.history}
+          />
+          <Table history={this.state.history} />
+        </React.Fragment>
+      </div>
     )
   }
 }

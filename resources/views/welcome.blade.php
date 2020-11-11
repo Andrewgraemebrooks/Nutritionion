@@ -11,7 +11,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
     </head>
     <body>
-        <div id="app" class="main-container d-flex align-items-center justify-content-center"></div>
+        <div id="app" class="container-fluid d-flex align-items-center justify-content-center"></div>
         <script src="{{asset('js/index.js')}}"></script>
     </body>
 </html>
