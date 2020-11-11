@@ -12,7 +12,7 @@ To install, clone the directory using the command:
 
 `git clone https://github.com/Andrewgraemebrooks/Nutritionion.git`
 
-After cloning the files run the following npm command:
+After cloning the files run the following npm command to install dependencies:
 
 `composer install && npm install`
 
@@ -22,7 +22,7 @@ When downloaded the developer must create their own `.env` file here. An example
 
 I have included a npm script that runs both the laravel server-side, with `php artisan serve` and the react client-side `npm run watch`. 
 
-`npm run concurrently`
+Run `npm run concurrently`
 
 The user can then search for any ingredient and the application will fetch the nutritional information for it.
 
