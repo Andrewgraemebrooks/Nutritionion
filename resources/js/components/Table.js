@@ -6,7 +6,7 @@ class Table extends Component {
   render() {
     const history = this.props.history
     return (
-      <div id="table-col" className="col-sm-8">
+      <div className="col-sm-8">
         <table
           className={classNames(
             "table",

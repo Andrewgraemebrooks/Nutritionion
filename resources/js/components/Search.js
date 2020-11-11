@@ -4,12 +4,20 @@ import { Map, List } from "immutable"
 import isEmpty from "../validation/isEmpty"
 
 class Search extends Component {
+  /**
+   * Initialises the state for the App class
+   * @constructor
+   */
   constructor() {
     super()
     this.state = {
       userInput: "",
     }
   }
+  /**
+   * Fetches the nutrition information of the requested ingredient.
+   * @returns {void}
+   */
   getNutritionInfo() {
     const data = { userInput: encodeURI(this.state.userInput) }
     axios
@@ -35,10 +43,7 @@ class Search extends Component {
   }
   render() {
     return (
-      <div
-        id="search-col"
-        className="col-sm-4 d-flex flex-column justify-content-center align-items-center"
-      >
+      <div className="col-sm-4 d-flex flex-column justify-content-center align-items-center">
         <div className="row text-center text-white">
           <h1>Get Nutritional Information</h1>
         </div>

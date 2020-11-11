@@ -5,6 +5,10 @@ import Search from "./components/Search"
 import Table from "./components/Table"
 
 class App extends Component {
+  /**
+   * Initialises the state for the App class
+   * @constructor
+   */
   constructor() {
     super()
     this.state = {
@@ -13,6 +17,11 @@ class App extends Component {
     }
   }
 
+  /**
+   * Updates the state when a change occurs
+   * @param {Object} changedObject - The object that is added to state.
+   * @returns {void}
+   */
   handleChange(changedObject) {
     this.setState(changedObject)
   }

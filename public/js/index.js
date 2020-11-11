@@ -71759,6 +71759,10 @@ var App = /*#__PURE__*/function (_Component) {
 
   var _super = _createSuper(App);
 
+  /**
+   * Initialises the state for the App class
+   * @constructor
+   */
   function App() {
     var _this;
 
@@ -71771,6 +71775,12 @@ var App = /*#__PURE__*/function (_Component) {
     };
     return _this;
   }
+  /**
+   * Updates the state when a change occurs
+   * @param {Object} changedObject - The object that is added to state.
+   * @returns {void}
+   */
+
 
   _createClass(App, [{
     key: "handleChange",
@@ -71895,6 +71905,10 @@ var Search = /*#__PURE__*/function (_Component) {
 
   var _super = _createSuper(Search);
 
+  /**
+   * Initialises the state for the App class
+   * @constructor
+   */
   function Search() {
     var _this;
 
@@ -71906,6 +71920,11 @@ var Search = /*#__PURE__*/function (_Component) {
     };
     return _this;
   }
+  /**
+   * Fetches the nutrition information of the requested ingredient.
+   * @returns {void}
+   */
+
 
   _createClass(Search, [{
     key: "getNutritionInfo",
@@ -71940,7 +71959,6 @@ var Search = /*#__PURE__*/function (_Component) {
       var _this3 = this;
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        id: "search-col",
         className: "col-sm-4 d-flex flex-column justify-content-center align-items-center"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row text-center text-white"
@@ -72033,7 +72051,6 @@ var Table = /*#__PURE__*/function (_Component) {
     value: function render() {
       var history = this.props.history;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        id: "table-col",
         className: "col-sm-8"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("table", {
         className: classnames__WEBPACK_IMPORTED_MODULE_2___default()("table", "table-bordered", "text-white", "justify-content-center", {
@@ -72107,6 +72124,11 @@ __webpack_require__(/*! ./App */ "./resources/js/App.js");
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "capitaliseSentence", function() { return capitaliseSentence; });
+/**
+ * Capitalises the first letter of each word in a sentence
+ * @param {string} string - The sentence to capitalise.
+ * @returns {string} Capitalised sentence
+ */
 var capitaliseSentence = function capitaliseSentence(string) {
   return string.split(" ").map(function (x) {
     return x.charAt(0).toUpperCase() + x.slice(1);
